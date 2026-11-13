@@ -1,0 +1,427 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Descriptive Specifications Simulator</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    margin: 0;
+    color: #222;
+}
+header {
+    background: #263b80;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+.container {
+    max-width: 950px;
+    margin: 25px auto;
+    padding: 20px;
+}
+.card {
+    background: white;
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #ccc;
+}
+h2 { color: #263b80; }
+button {
+    background: #354fa1;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+}
+button:hover { background: #172c69; }
+input, select {
+    padding: 10px;
+    margin: 7px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+.output {
+    background: #edf1fa;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 7px;
+    white-space: pre-wrap;
+}
+.tab {
+    background: #172c69;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #bbb;
+    padding: 10px;
+    text-align: left;
+}
+th { background: #dce4fa; }
+.section { display: none; }
+.active { display: block; }
+.good { color: green; font-weight: bold; }
+.bad { color: red; font-weight: bold; }
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>DESCRIPTIVE SPECIFICATIONS SIMULATOR</h1>
+<p>Logic and Algebraic Specifications</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+<h2>Introduction</h2>
+<p>
+Descriptive specifications describe what a software
+system should do rather than how it should be implemented.
+They use mathematical concepts to define system behaviour.
+</p>
+<p><b>Two major approaches:</b></p>
+<ul>
+<li>Logic Specifications</li>
+<li>Algebraic Specifications</li>
+</ul>
+</div>
+
+<div class="card">
+<button class="tab" onclick="show('logic')">
+Logic Specification
+</button>
+
+<button class="tab" onclick="show('algebra')">
+Algebraic Specification
+</button>
+
+<button class="tab" onclick="show('compare')">
+Comparison
+</button>
+</div>
+
+<!-- LOGIC SPECIFICATION -->
+
+<div id="logic" class="section active">
+
+<div class="card">
+<h2>1. Logic Specification Simulator</h2>
+
+<p>
+Example: Bank Withdrawal System
+</p>
+
+<p>
+A customer can withdraw money only if:
+</p>
+
+<ul>
+<li>Account is active.</li>
+<li>Withdrawal amount is greater than zero.</li>
+<li>Sufficient balance is available.</li>
+</ul>
+
+<h3>Enter Account Details</h3>
+
+<label>Account Status:</label>
+<select id="status">
+<option value="yes">Active</option>
+<option value="no">Inactive</option>
+</select>
+<br>
+
+<label>Account Balance:</label>
+<input type="number" id="balance" value="5000">
+<br>
+
+<label>Withdrawal Amount:</label>
+<input type="number" id="amount" value="1000">
+<br>
+
+<button onclick="withdraw()">Check Withdrawal</button>
+<button onclick="resetLogic()">Reset</button>
+
+<div class="output" id="logicOutput">
+Enter values and click Check Withdrawal.
+</div>
+
+</div>
+
+<div class="card">
+<h2>Logic Specification Rules</h2>
+
+<h3>Precondition</h3>
+<p>
+Account Active AND Amount > 0 AND Amount ≤ Balance
+</p>
+
+<h3>Postcondition</h3>
+<p>
+New Balance = Old Balance - Withdrawal Amount
+</p>
+
+<h3>Invariant</h3>
+<p>
+Account Balance ≥ 0
+</p>
+</div>
+
+</div>
+
+<!-- ALGEBRAIC SPECIFICATION -->
+
+<div id="algebra" class="section">
+
+<div class="card">
+<h2>2. Algebraic Specification Simulator</h2>
+
+<p>
+Example: Stack Data Structure
+</p>
+
+<p>
+A Stack follows LIFO (Last In First Out).
+The last inserted element is removed first.
+</p>
+
+<h3>Enter an Element</h3>
+
+<input type="text" id="element"
+placeholder="Enter element">
+
+<br>
+
+<button onclick="push()">PUSH</button>
+<button onclick="pop()">POP</button>
+<button onclick="peek()">TOP</button>
+<button onclick="clearStack()">CLEAR</button>
+
+<div class="output" id="stackOutput">
+Stack is empty.
+</div>
+
+<h3>Current Stack</h3>
+<div class="output" id="stackDisplay">
+Empty
+</div>
+</div>
+
+<div class="card">
+<h2>Algebraic Specification Equations</h2>
+
+<p><b>1. Create an empty stack:</b></p>
+<p>isEmpty(create()) = true</p>
+
+<p><b>2. Push an element:</b></p>
+<p>isEmpty(push(S,x)) = false</p>
+
+<p><b>3. Get top element:</b></p>
+<p>top(push(S,x)) = x</p>
+
+<p><b>4. Remove top element:</b></p>
+<p>pop(push(S,x)) = S</p>
+
+</div>
+</div>
+
+<!-- COMPARISON -->
+
+<div id="compare" class="section">
+<div class="card">
+
+<h2>3. Comparison of Specifications</h2>
+
+<table>
+<tr>
+<th>Basis</th>
+<th>Logic Specification</th>
+<th>Algebraic Specification</th>
+</tr>
+
+<tr>
+<td>Meaning</td>
+<td>Uses logical statements and conditions.</td>
+<td>Uses operations and equations.</td>
+</tr>
+
+<tr>
+<td>Focus</td>
+<td>Conditions and properties.</td>
+<td>Behaviour of abstract data types.</td>
+</tr>
+
+<tr>
+<td>Elements</td>
+<td>Preconditions, postconditions, invariants.</td>
+<td>Operations, signatures and axioms.</td>
+</tr>
+
+<tr>
+<td>Example</td>
+<td>Bank withdrawal system.</td>
+<td>Stack and Queue.</td>
+</tr>
+
+<tr>
+<td>Purpose</td>
+<td>Defines system correctness.</td>
+<td>Defines data type behaviour.</td>
+</tr>
+</table>
+
+</div>
+
+<div class="card">
+<h2>4. Knowledge Check</h2>
+
+<p>
+Which specification uses equations such as
+top(push(S,x)) = x?
+</p>
+
+<input type="radio" name="answer" value="logic">
+Logic Specification
+<br>
+
+<input type="radio" name="answer" value="algebra">
+Algebraic Specification
+<br>
+
+<button onclick="checkQuiz()">Submit Answer</button>
+
+<div class="output" id="quizOutput">
+Select your answer.
+</div>
+</div>
+</div>
+
+</div>
+
+<script>
+
+function show(id) {
+    document.querySelectorAll('.section').forEach(
+        s => s.classList.remove('active')
+    );
+    document.getElementById(id).classList.add('active');
+}
+
+function withdraw() {
+    let active = document.getElementById("status").value;
+    let balance = Number(document.getElementById("balance").value);
+    let amount = Number(document.getElementById("amount").value);
+
+    let output = document.getElementById("logicOutput");
+
+    if (balance < 0 || amount <= 0 || !Number.isFinite(balance) || !Number.isFinite(amount)) {
+        output.innerHTML = "<span class='bad'>Invalid input!</span>";
+    }
+    else if (active === "no") {
+        output.innerHTML = "<span class='bad'>Transaction Failed: Account is inactive.</span>";
+    }
+    else if (amount > balance) {
+        output.innerHTML = "<span class='bad'>Transaction Failed: Insufficient Balance.</span>";
+    }
+    else {
+        let remaining = balance - amount;
+
+        output.innerHTML =
+        "<span class='good'>Transaction Successful!</span>" +
+        "\nAccount is Active: TRUE" +
+        "\nAmount is Positive: TRUE" +
+        "\nSufficient Balance: TRUE" +
+        "\n\nOld Balance: ₹" + balance +
+        "\nWithdrawal: ₹" + amount +
+        "\nNew Balance: ₹" + remaining;
+    }
+}
+
+function resetLogic() {
+    document.getElementById("status").value = "yes";
+    document.getElementById("balance").value = 5000;
+    document.getElementById("amount").value = 1000;
+    document.getElementById("logicOutput").innerText =
+    "Enter values and click Check Withdrawal.";
+}
+
+let stack = [];
+
+function updateStack(message) {
+    document.getElementById("stackOutput").innerText = message;
+
+    document.getElementById("stackDisplay").innerText =
+    stack.length === 0
+    ? "Empty"
+    : "TOP\n" + stack.slice().reverse().join("\n") + "\nBOTTOM";
+}
+
+function push() {
+    let value = document.getElementById("element").value.trim();
+
+    if (value === "") {
+        updateStack("Please enter an element first.");
+        return;
+    }
+
+    stack.push(value);
+    updateStack("Element " + value + " pushed successfully!");
+    document.getElementById("element").value = "";
+}
+
+function pop() {
+    if (stack.length === 0) {
+        updateStack("Stack Underflow! Stack is empty.");
+        return;
+    }
+
+    let removed = stack.pop();
+    updateStack("Element " + removed + " popped successfully!");
+}
+
+function peek() {
+    if (stack.length === 0) {
+        updateStack("Stack is empty. No top element.");
+        return;
+    }
+
+    updateStack("Top Element: " + stack[stack.length - 1]);
+}
+
+function clearStack() {
+    stack = [];
+    updateStack("Stack cleared successfully!");
+}
+
+function checkQuiz() {
+    let answer = document.querySelector(
+        'input[name="answer"]:checked'
+    );
+
+    let output = document.getElementById("quizOutput");
+
+    if (!answer) {
+        output.innerText = "Please select an answer.";
+    }
+    else if (answer.value === "algebra") {
+        output.innerHTML =
+        "<span class='good'>Correct Answer!</span> Algebraic Specification.";
+    }
+    else {
+        output.innerHTML =
+        "<span class='bad'>Incorrect!</span> The correct answer is Algebraic Specification.";
+    }
+}
+
+</script>
+
+</body>
+</html>
